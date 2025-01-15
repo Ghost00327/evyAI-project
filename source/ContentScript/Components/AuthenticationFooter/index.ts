@@ -1,0 +1,1 @@
+export { AuthenticationFooter } from "./AuthenticationFooter";

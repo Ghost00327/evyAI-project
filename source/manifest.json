@@ -1,0 +1,109 @@
+{
+  "__firefox__manifest_version": 2,
+  "__chrome|opera|edge__manifest_version": 3,
+  "name": "evyAI - AI Assistant for Social Media",
+  "version": "1.3.9",
+
+  "icons": {
+    "128": "assets/Icons/icon-128.png"
+  },
+  "description": "evyAI is an AI Assistant that creates personalized comments, posts, and replies.",
+  "short_name": "evyAI - AI Assistant for Social Media",
+
+  "__firefox__permissions": [
+    "tabs",
+    "identity",
+    "storage",
+    "https://us-central1-gptchromeextension.cloudfunctions.net/*"
+  ],
+
+  "__chrome|opera|edge__permissions": ["identity", "storage", "activeTab", "scripting"],
+  "__chrome|opera|edge__host_permissions": [
+    "https://us-central1-gptchromeextension.cloudfunctions.net/*",
+    "https://www.linkedin.com/*"
+  ],
+  "__firefox__content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self';",
+  "__chrome|opera|edge__content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';script-src-elem 'self' 'unsafe-inline' https://apis.google.com",
+    "sandbox": "sandbox allow-scripts; script-src 'self' 'https://apis.google.com/' 'https://www.gstatic.com/' 'https://*.firebaseio.com' 'https://www.googleapis.com' 'https://ajax.googleapis.com'; object-src 'self'"
+  },
+  "__chrome|firefox__author": "Evy AI",
+  "__opera__developer": {
+    "name": "evyAI"
+  },
+
+  "__firefox__applications": {
+    "gecko": {
+      "id": "{754FB1AD-CC3B-4856-B6A0-7786F8CA9D17}"
+    }
+  },
+
+  "__chrome__minimum_chrome_version": "88",
+  "__opera__minimum_opera_version": "73",
+
+  "__chrome|opera|edge__action": {
+    "default_icon": {
+      "128": "assets/Icons/icon-128.png"
+    },
+    "default_title": "evyAI"
+  },
+
+  "__firefox__browser_action": {
+    "default_icon": {
+      "128": "assets/Icons/icon-128.png"
+    },
+    "default_title": "evyAI"
+  },
+
+  "__chrome|opera__options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+
+  "background": {
+    "__firefox__scripts": ["js/background.bundle.js"],
+    "__chrome|opera|edge__service_worker": "js/background.bundle.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://*.evyai.com/*",
+        "http://*.evyai.com/*",
+        "http://localhost:3000/*"
+      ],
+      "js": ["js/contentScript.bundle.js"],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/feed/sales-navigator/*",
+        "https://*.evyai.com/*",
+        "http://*.evyai.com/*",
+        "http://localhost:3000/*"
+      ],
+      "js": ["js/contentScript.bundle.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "__chrome|opera|edge__web_accessible_resources": [
+    {
+      "resources": ["js/contentScript.bundle.js", "assets/*"],
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://*.evyai.com/*",
+        "http://*.evyai.com/*",
+        "http://localhost:3000/*"
+      ]
+    }
+  ],
+  "__firefox__web_accessible_resources": ["js/contentScript.bundle.js", "assets/*"],
+  "oauth2": {
+    "client_id": "776551117048-qtknk0lcqsr36tqj9t6dijj6ouuqpbmd.apps.googleusercontent.com",
+    "scopes": ["email", "https://www.googleapis.com/auth/userinfo.email"]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkhjwSn762nPjffYl1pB8IsYpOhGEk21hy+LpvoIHuXEAsSvtewxr7ONqPpp0Fj6Nyl3xB8rkhbDkRuvs9ORsxTmRKP0/0oXqYN+PRUG+puguimLh0wtQNBVSHuqgUUws/DezVkXESyUsk0sovkdL0lyLrCr3Nw9cQjkH3bE6A9Mn1LoXJw9zpoedjXUXAsEumfAiHm1uOPfm5ip5u1133uPvWjcRnw4OkOfwbmHEUHbMilODwgiWhNzsAN7IEax5LrcKMvplfyabSvjdvHjpGoZVdUR67KximsXvhpODKRLY4lcyYIoFV2D4bH6sjb1PC7W/Kj13dgt63vyZrdg+LQIDAQAB"
+}
